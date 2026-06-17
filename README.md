@@ -50,6 +50,7 @@ caso encontrem problemas no código.
 
 ## Rodando os testes
 
+
 ```bash
 pytest -v
 ```
