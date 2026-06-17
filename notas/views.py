@@ -56,7 +56,10 @@ def editar_nota_view(request, nota_id):
     if request.method == "POST":
         try:
             notas = services.editar_nota(
-                notas, nota_id, request.POST.get("titulo", ""), request.POST.get("conteudo", "")
+                notas,
+                nota_id,
+                request.POST.get("titulo", ""),
+                request.POST.get("conteudo", ""),
             )
             _set_notas(request, notas)
             messages.success(request, "Nota atualizada!")
@@ -81,4 +84,6 @@ def remover_nota_view(request, nota_id):
 
 def healthz(request):
     """Endpoint simples de verificação de saúde, útil para o Cloud Run."""
-    return JsonResponse({"status": "ok", "versao": os.environ.get("GIT_SHA", "dev")[:7]})
+    return JsonResponse(
+        {"status": "ok", "versao": os.environ.get("GIT_SHA", "dev")[:7]}
+    )

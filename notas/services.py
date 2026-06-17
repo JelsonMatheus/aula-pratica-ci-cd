@@ -27,11 +27,15 @@ def validar_nota(titulo: str, conteudo: str) -> None:
     if not titulo:
         raise NotaInvalida("O título não pode estar vazio.")
     if len(titulo) > TITULO_MAX_LEN:
-        raise NotaInvalida(f"O título não pode ter mais de {TITULO_MAX_LEN} caracteres.")
+        raise NotaInvalida(
+            f"O título não pode ter mais de {TITULO_MAX_LEN} caracteres."
+        )
     if not conteudo:
         raise NotaInvalida("O conteúdo não pode estar vazio.")
     if len(conteudo) > CONTEUDO_MAX_LEN:
-        raise NotaInvalida(f"O conteúdo não pode ter mais de {CONTEUDO_MAX_LEN} caracteres.")
+        raise NotaInvalida(
+            f"O conteúdo não pode ter mais de {CONTEUDO_MAX_LEN} caracteres."
+        )
 
 
 def proximo_id(notas: List[dict]) -> int:
@@ -55,7 +59,9 @@ def adicionar_nota(notas: List[dict], titulo: str, conteudo: str) -> List[dict]:
     return notas + [nova]
 
 
-def editar_nota(notas: List[dict], nota_id: int, titulo: str, conteudo: str) -> List[dict]:
+def editar_nota(
+    notas: List[dict], nota_id: int, titulo: str, conteudo: str
+) -> List[dict]:
     """Retorna uma nova lista com a nota `nota_id` atualizada."""
     validar_nota(titulo, conteudo)
     encontrada = False
@@ -89,7 +95,8 @@ def buscar_notas(notas: List[dict], termo: Optional[str]) -> List[dict]:
         return list(notas)
     termo_lower = termo.strip().lower()
     return [
-        n for n in notas
+        n
+        for n in notas
         if termo_lower in n["titulo"].lower() or termo_lower in n["conteudo"].lower()
     ]
 

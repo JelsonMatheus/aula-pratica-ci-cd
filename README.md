@@ -33,12 +33,20 @@ Acesse http://127.0.0.1:8000/
 ## Verificando o estilo do código (Ruff)
 
 ```bash
-ruff check .
+ruff check .       # linter: verifica estilo e qualidade
+ruff format --check .  # formatter: verifica a formatação sem alterar arquivos
 ```
 
-O [Ruff](https://docs.astral.sh/ruff/) é o linter usado no projeto. Ele roda
-antes dos testes na etapa de CI e bloqueia o deploy caso encontre problemas de
-estilo ou qualidade no código.
+Para corrigir os problemas automaticamente:
+
+```bash
+ruff check --fix .
+ruff format .
+```
+
+O [Ruff](https://docs.astral.sh/ruff/) é o linter e formatter usado no projeto.
+Ambas as verificações rodam antes dos testes na etapa de CI e bloqueiam o deploy
+caso encontrem problemas no código.
 
 ## Rodando os testes
 

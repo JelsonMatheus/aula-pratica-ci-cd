@@ -5,12 +5,16 @@ def test_lista_vazia_mostra_mensagem(client):
 
 
 def test_criar_nota_via_post_redireciona(client):
-    response = client.post("/nova/", {"titulo": "Teste", "conteudo": "Conteúdo de teste"})
+    response = client.post(
+        "/nova/", {"titulo": "Teste", "conteudo": "Conteúdo de teste"}
+    )
     assert response.status_code == 302
 
 
 def test_criar_nota_aparece_na_lista(client):
-    client.post("/nova/", {"titulo": "Estudar Django", "conteudo": "Revisar views e testes"})
+    client.post(
+        "/nova/", {"titulo": "Estudar Django", "conteudo": "Revisar views e testes"}
+    )
     response = client.get("/")
     assert "Estudar Django" in response.content.decode()
 
@@ -22,7 +26,9 @@ def test_criar_nota_com_titulo_vazio_nao_adiciona(client):
 
 
 def test_buscar_via_querystring_filtra_resultado(client):
-    client.post("/nova/", {"titulo": "Reunião de equipe", "conteudo": "Pauta da sprint"})
+    client.post(
+        "/nova/", {"titulo": "Reunião de equipe", "conteudo": "Pauta da sprint"}
+    )
     client.post("/nova/", {"titulo": "Lista de compras", "conteudo": "Leite e pão"})
     response = client.get("/?q=compras")
     conteudo = response.content.decode()

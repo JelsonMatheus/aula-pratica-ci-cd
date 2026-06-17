@@ -39,6 +39,9 @@ jobs:
       - name: Verificar estilo e qualidade do código (Ruff)
         run: ruff check .
 
+      - name: Verificar formatação do código (Ruff)
+        run: ruff format --check .
+
       - name: Rodar testes automatizados
         env:
           DJANGO_SECRET_KEY: chave-de-teste-nao-usar-em-producao
