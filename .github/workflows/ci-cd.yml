@@ -36,6 +36,9 @@ jobs:
       - name: Instalar dependências (incluindo as de teste)
         run: pip install -r requirements-dev.txt
 
+      - name: Verificar estilo e qualidade do código (Ruff)
+        run: ruff check .
+
       - name: Rodar testes automatizados
         env:
           DJANGO_SECRET_KEY: chave-de-teste-nao-usar-em-producao

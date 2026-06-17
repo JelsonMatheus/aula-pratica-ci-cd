@@ -30,6 +30,16 @@ python manage.py runserver
 
 Acesse http://127.0.0.1:8000/
 
+## Verificando o estilo do código (Ruff)
+
+```bash
+ruff check .
+```
+
+O [Ruff](https://docs.astral.sh/ruff/) é o linter usado no projeto. Ele roda
+antes dos testes na etapa de CI e bloqueia o deploy caso encontre problemas de
+estilo ou qualidade no código.
+
 ## Rodando os testes
 
 ```bash
@@ -135,6 +145,6 @@ notas/
     test_views.py
 Dockerfile
 requirements.txt      # dependências de produção
-requirements-dev.txt   # + pytest/pytest-django, usadas só na CI
+requirements-dev.txt   # + pytest/pytest-django/ruff, usadas só na CI
 .github/workflows/ci-cd.yml
 ```
