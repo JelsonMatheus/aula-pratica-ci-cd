@@ -48,42 +48,6 @@ principalSet://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workl
 ```
 e selecionar o papel **Workload Identity User**.
 
-Se o botão realmente não aparecer, as causas mais comuns são: (a) falta o papel
-`roles/iam.serviceAccountAdmin` na sua própria conta de usuário, ou (b) você está na
-página geral de **IAM** do projeto em vez da página específica da conta de serviço —
-são duas telas diferentes, e esse binding só funciona feito na segunda.
-
-## 3. Secrets do GitHub criados como "Environment secrets"
-
-Os 4 secrets (`GCP_PROJECT_ID`, `GCP_WIF_PROVIDER`, `GCP_SERVICE_ACCOUNT`,
-`DJANGO_SECRET_KEY`) foram criados vinculados a um **ambiente** do GitHub chamado
-"Bloco de Notas", em vez de como **Repository secrets**. Nesse caso, o GitHub não
-injeta os valores automaticamente — o workflow precisa declarar explicitamente qual
-ambiente usar.
-
-**Erro gerado:**
-```
-the GitHub Action workflow must specify exactly one of "workload_identity_provider"
-or "credentials_json"!
-```
-
-**Solução:** adicionar a linha `environment` dentro do job `deploy` do
-`.github/workflows/ci-cd.yml`, com o nome exatamente igual ao que aparece no GitHub
-(maiúsculas/minúsculas e espaço incluídos):
-
-```yaml
-  deploy:
-    needs: test
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    environment: "Bloco de Notas"
-    steps:
-      ...
-```
-
-Alternativa (não usada aqui, mas válida): recriar os mesmos 4 secrets como
-**Repository secrets** em vez de Environment secrets.
-
 ## 4. Permissão de escrita no Artifact Registry
 
 Erro ao tentar publicar a imagem:
