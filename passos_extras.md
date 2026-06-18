@@ -51,6 +51,7 @@ e selecionar o papel **Workload Identity User**.
 ## 4. Permissão de escrita no Artifact Registry
 
 Erro ao tentar publicar a imagem:
+
 ```
 denied: Permission 'artifactregistry.repositories.uploadArtifacts' denied on resource
 ```
