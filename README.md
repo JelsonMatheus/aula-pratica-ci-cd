@@ -155,4 +155,5 @@ Dockerfile
 requirements.txt      # dependências de produção
 requirements-dev.txt   # + pytest/pytest-django/ruff, usadas só na CI
 .github/workflows/ci-cd.yml
+
 ```
